@@ -51,7 +51,7 @@ RUN apt update -y \
     && apt update -y \
     && apt install -y --no-install-recommends git \
 # Add to the end of package installation RUN commands
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* /tmp/* /var/tmp/*
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* /tmp/* /var/tmp/* \
 # Add user and group
     && adduser --disabled-password --gecos "" --uid 1001 runner \
     && groupadd docker --gid 123 \
