@@ -223,6 +223,7 @@ namespace GitHub.Runner.Worker.Handlers
             Environment["ACTIONS_RUNTIME_TOKEN"] = systemConnection.Authorization.Parameters[EndpointAuthorizationParameters.AccessToken];
 
             string customCacheUrl = System.Environment.GetEnvironmentVariable("CUSTOM_ACTIONS_CACHE_URL");
+            Console.WriteLine($"[DEBUG] CUSTOM_ACTIONS_CACHE_URL: '{customCacheUrl}'");
             if (!string.IsNullOrEmpty(customCacheUrl))
             {
                 Environment["ACTIONS_CACHE_URL"] = customCacheUrl;
