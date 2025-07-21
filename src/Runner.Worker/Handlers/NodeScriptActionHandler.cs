@@ -56,36 +56,13 @@ namespace GitHub.Runner.Worker.Handlers
             Environment["ACTIONS_RUNTIME_URL"] = systemConnection.Url.AbsoluteUri;
             Environment["ACTIONS_RUNTIME_TOKEN"] = systemConnection.Authorization.Parameters[EndpointAuthorizationParameters.AccessToken];
 
-            // string customCacheUrl = System.Environment.GetEnvironmentVariable("CUSTOM_ACTIONS_CACHE_URL");
-            // Console.WriteLine($"[DEBUG] CUSTOM_ACTIONS_CACHE_URL: '{customCacheUrl}'");
-            // if (!string.IsNullOrEmpty(customCacheUrl))
-            // {
-            //     Environment["ACTIONS_CACHE_URL"] = customCacheUrl;
-            // }
-            // else if (systemConnection.Data.TryGetValue("CacheServerUrl", out var cacheUrl) && !string.IsNullOrEmpty(cacheUrl))
-            // {
-            //     Environment["ACTIONS_CACHE_URL"] = cacheUrl;
-            // }
+            string customActionsResultsUrl = System.Environment.GetEnvironmentVariable("CUSTOM_ACTIONS_RESULTS_URL");
+            ExecutionContext.Debug($"[DEBUG] CUSTOM_ACTIONS_RESULTS_URL (from System.Environment): '{customActionsResultsUrl}'");
 
-            // Use ExecutionContext.Debug for log visibility on all platforms
-            string customCacheUrl = System.Environment.GetEnvironmentVariable("CUSTOM_ACTIONS_CACHE_URL");
-            ExecutionContext.Debug($"[DEBUG] CUSTOM_ACTIONS_CACHE_URL (from System.Environment): '{customCacheUrl}'");
-
-            if (!string.IsNullOrEmpty(customCacheUrl))
-            {
-                Environment["ACTIONS_CACHE_URL"] = customCacheUrl;
-                ExecutionContext.Debug($"[DEBUG] ACTIONS_CACHE_URL set from CUSTOM_ACTIONS_CACHE_URL: '{customCacheUrl}'");
-            }
-            else if (systemConnection.Data.TryGetValue("CacheServerUrl", out var cacheUrl) && !string.IsNullOrEmpty(cacheUrl))
+            if (systemConnection.Data.TryGetValue("CacheServerUrl", out var cacheUrl) && !string.IsNullOrEmpty(cacheUrl))
             {
                 Environment["ACTIONS_CACHE_URL"] = cacheUrl;
-                ExecutionContext.Debug($"[DEBUG] ACTIONS_CACHE_URL set from systemConnection.Data['CacheServerUrl']: '{cacheUrl}'");
             }
-            else
-            {
-                ExecutionContext.Debug("[DEBUG] ACTIONS_CACHE_URL not set; no value found.");
-            }
-
             if (systemConnection.Data.TryGetValue("PipelinesServiceUrl", out var pipelinesServiceUrl) && !string.IsNullOrEmpty(pipelinesServiceUrl))
             {
                 Environment["ACTIONS_RUNTIME_URL"] = pipelinesServiceUrl;
@@ -95,9 +72,15 @@ namespace GitHub.Runner.Worker.Handlers
                 Environment["ACTIONS_ID_TOKEN_REQUEST_URL"] = generateIdTokenUrl;
                 Environment["ACTIONS_ID_TOKEN_REQUEST_TOKEN"] = systemConnection.Authorization.Parameters[EndpointAuthorizationParameters.AccessToken];
             }
-            if (systemConnection.Data.TryGetValue("ResultsServiceUrl", out var resultsUrl) && !string.IsNullOrEmpty(resultsUrl))
+            if(!string.IsNullOrEmpty(customActionsResultsUrl))
+            {
+                Environment["ACTIONS_RESULTS_URL"] = customActionsResultsUrl;
+                ExecutionContext.Debug($"[DEBUG] CUSTOM_ACTIONS_RESULTS_URL set from CUSTOM_ACTIONS_RESULTS_URL: '{customActionsResultsUrl}'");
+            }
+            else if (systemConnection.Data.TryGetValue("ResultsServiceUrl", out var resultsUrl) && !string.IsNullOrEmpty(resultsUrl))
             {
                 Environment["ACTIONS_RESULTS_URL"] = resultsUrl;
+                ExecutionContext.Debug($"[DEBUG] ACTIONS_RESULTS_URL set from systemConnection.Data['ResultsServiceUrl']: '{resultsUrl}'");
             }
 
             if (ExecutionContext.Global.Variables.GetBoolean("actions_uses_cache_service_v2") ?? false)
