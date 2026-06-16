@@ -1,0 +1,59 @@
+# configure upstream
+git remote add upstream git@github.com:actions/runner.git
+
+# update changes from upstream
+git fetch upstream
+
+# apply changes locally
+git rebase upstream/main
+
+# push to remote
+git push origin main --force
+
+##
+# release
+##
+
+# cleanup
+git checkout main
+#git pull --rebase
+git pull origin main --rebase
+git branch -D release
+
+# make a release
+export TAG="2.332.0"
+
+git tag -d v${TAG}
+
+git checkout -b release
+echo ${TAG} > src/runnerversion
+echo ${TAG} > releaseVersion
+git commit -am "chore: release of ${TAG}"
+git tag -a v${TAG} -m "chore: release of ${TAG}"
+git push origin v${TAG}
+
+
+##
+# pull requestes
+##
+
+git fetch upstream pull/ID/head:BRANCH_NAME
+
+git checkout BRANCH_NAME
+
+# git push origin BRANCH_NAME
+
+ex, https://github.com/actions/runner/pull/1801/files
+
+git fetch upstream pull/1801/head:windows-container
+
+git checkout windows-container
+
+# git push origin windows-container
+
+## DEBUG
+
+add variable on repo
+
+ACTIONS_RUNNER_DEBUG=true
+ACTIONS_STEP_DEBUG=true
