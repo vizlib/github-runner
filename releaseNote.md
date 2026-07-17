@@ -65,7 +65,7 @@ The following snipped needs to be run on `powershell`:
 # Create a folder under the drive root
 mkdir \actions-runner ; cd \actions-runner
 # Download the latest runner package
-Invoke-WebRequest -Uri https://github.com/dawidmalina/github-runner/releases/download/v<RUNNER_VERSION>/actions-runner-win-x64-<RUNNER_VERSION>.zip -OutFile actions-runner-win-x64-<RUNNER_VERSION>.zip
+Invoke-WebRequest -Uri https://github.com/vizlib/github-runner/releases/download/v<RUNNER_VERSION>/actions-runner-win-x64-<RUNNER_VERSION>.zip -OutFile actions-runner-win-x64-<RUNNER_VERSION>.zip
 # Extract the installer
 Add-Type -AssemblyName System.IO.Compression.FileSystem ;
 [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD\actions-runner-win-x64-<RUNNER_VERSION>.zip", "$PWD")
@@ -81,7 +81,7 @@ The following snipped needs to be run on `powershell`:
 # Create a folder under the drive root
 mkdir \actions-runner ; cd \actions-runner
 # Download the latest runner package
-Invoke-WebRequest -Uri https://github.com/dawidmalina/github-runner/releases/download/v<RUNNER_VERSION>/actions-runner-win-arm64-<RUNNER_VERSION>.zip -OutFile actions-runner-win-arm64-<RUNNER_VERSION>.zip
+Invoke-WebRequest -Uri https://github.com/vizlib/github-runner/releases/download/v<RUNNER_VERSION>/actions-runner-win-arm64-<RUNNER_VERSION>.zip -OutFile actions-runner-win-arm64-<RUNNER_VERSION>.zip
 # Extract the installer
 Add-Type -AssemblyName System.IO.Compression.FileSystem ;
 [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD\actions-runner-win-arm64-<RUNNER_VERSION>.zip", "$PWD")
@@ -93,7 +93,7 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem ;
 # Create a folder
 mkdir actions-runner && cd actions-runner
 # Download the latest runner package
-curl -O -L https://github.com/dawidmalina/github-runner/releases/download/v<RUNNER_VERSION>/actions-runner-osx-x64-<RUNNER_VERSION>.tar.gz
+curl -O -L https://github.com/vizlib/github-runner/releases/download/v<RUNNER_VERSION>/actions-runner-osx-x64-<RUNNER_VERSION>.tar.gz
 # Extract the installer
 tar xzf ./actions-runner-osx-x64-<RUNNER_VERSION>.tar.gz
 ```
@@ -104,7 +104,7 @@ tar xzf ./actions-runner-osx-x64-<RUNNER_VERSION>.tar.gz
 # Create a folder
 mkdir actions-runner && cd actions-runner
 # Download the latest runner package
-curl -O -L https://github.com/dawidmalina/github-runner/releases/download/v<RUNNER_VERSION>/actions-runner-osx-arm64-<RUNNER_VERSION>.tar.gz
+curl -O -L https://github.com/vizlib/github-runner/releases/download/v<RUNNER_VERSION>/actions-runner-osx-arm64-<RUNNER_VERSION>.tar.gz
 # Extract the installer
 tar xzf ./actions-runner-osx-arm64-<RUNNER_VERSION>.tar.gz
 ```
@@ -115,7 +115,7 @@ tar xzf ./actions-runner-osx-arm64-<RUNNER_VERSION>.tar.gz
 # Create a folder
 mkdir actions-runner && cd actions-runner
 # Download the latest runner package
-curl -O -L https://github.com/dawidmalina/github-runner/releases/download/v<RUNNER_VERSION>/actions-runner-linux-x64-<RUNNER_VERSION>.tar.gz
+curl -O -L https://github.com/vizlib/github-runner/releases/download/v<RUNNER_VERSION>/actions-runner-linux-x64-<RUNNER_VERSION>.tar.gz
 # Extract the installer
 tar xzf ./actions-runner-linux-x64-<RUNNER_VERSION>.tar.gz
 ```
@@ -126,7 +126,7 @@ tar xzf ./actions-runner-linux-x64-<RUNNER_VERSION>.tar.gz
 # Create a folder
 mkdir actions-runner && cd actions-runner
 # Download the latest runner package
-curl -O -L https://github.com/dawidmalina/github-runner/releases/download/v<RUNNER_VERSION>/actions-runner-linux-arm64-<RUNNER_VERSION>.tar.gz
+curl -O -L https://github.com/vizlib/github-runner/releases/download/v<RUNNER_VERSION>/actions-runner-linux-arm64-<RUNNER_VERSION>.tar.gz
 # Extract the installer
 tar xzf ./actions-runner-linux-arm64-<RUNNER_VERSION>.tar.gz
 ```
@@ -137,7 +137,7 @@ tar xzf ./actions-runner-linux-arm64-<RUNNER_VERSION>.tar.gz
 # Create a folder
 mkdir actions-runner && cd actions-runner
 # Download the latest runner package
-curl -O -L https://github.com/dawidmalina/github-runner/releases/download/v<RUNNER_VERSION>/actions-runner-linux-arm-<RUNNER_VERSION>.tar.gz
+curl -O -L https://github.com/vizlib/github-runner/releases/download/v<RUNNER_VERSION>/actions-runner-linux-arm-<RUNNER_VERSION>.tar.gz
 # Extract the installer
 tar xzf ./actions-runner-linux-arm-<RUNNER_VERSION>.tar.gz
 ```
