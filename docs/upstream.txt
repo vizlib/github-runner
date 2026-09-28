@@ -32,6 +32,13 @@ git commit -am "chore: release of ${TAG}"
 git tag -a v${TAG} -m "chore: release of ${TAG}"
 git push origin v${TAG}
 
+# merge the release branch back into main so releaseVersion stays in sync
+# (skipping this leaves main's releaseVersion stale, which makes the next
+# sync wrongly look like "release not cut" even after tagging/publishing)
+git checkout main
+git merge --ff-only release
+git push origin main
+
 
 ##
 # pull requestes
