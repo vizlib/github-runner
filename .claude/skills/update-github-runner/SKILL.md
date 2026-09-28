@@ -133,13 +133,25 @@ git tag -a "v${TAG}" -m "chore: release of ${TAG}"
 
 ```bash
 git push origin "v${TAG}"
+git checkout main
+git merge --ff-only release
+git push origin main
 ```
+
+The merge-back is required, not optional: the tag push alone publishes the
+release, but the version-bump commit only exists on the throwaway `release`
+branch. Without merging it into `main`, `main`'s `releaseVersion` stays
+stale forever, and the next sync/check will wrongly report "release not
+cut" even though the release already shipped (this happened for real with
+v2.337.0 — see PR #3, `release-2.337.0` → `main`).
 
 ### Mode B — Unattended / automated
 
 Pushing a release tag directly is also unattended-unsafe (it immediately
 triggers the public release build/publish). Instead open a PR carrying the
-version-bump commit and let a human push the tag after merge:
+version-bump commit and let a human push the tag after merge. This mode
+already merges back correctly by construction — the PR's base is `main`, so
+merging it lands the version bump exactly like Mode A's explicit merge does:
 
 ```bash
 git push origin release:release-${TAG}
