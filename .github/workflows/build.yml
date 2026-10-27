@@ -104,8 +104,8 @@ jobs:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
           const release = await github.rest.repos.getLatestRelease({
-            owner: 'actions',
-            repo: 'runner',
+            owner: context.repo.owner,
+            repo: context.repo.repo,
           });
           const version = release.data.tag_name.replace(/^v/, '');
           core.setOutput('version', version);
